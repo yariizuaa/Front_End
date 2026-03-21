@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contato - Erased Project</title>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body style="background-color: #ffffff; color: #333; font-family: Arial, sans-serif;">
+
+    <header align="center">
+        <h1>Fale Conosco</h1>
+    </header>
+
+    <nav>
+        <ul style="display: flex; justify-content: center; gap: 20px; list-style: none; padding: 20px 0;">
+            <li><a href="exePratico.html" class="nav-link">Home</a></li>
+            <li><a href="sobre.html" class="nav-link">Sobre</a></li>
+        </ul>
+    </nav>  
+    <main class="container" style="max-width: 500px; margin: 50px auto; padding: 20px; background: #f9f9f9; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+        <h2 style="text-align: center; margin-bottom: 20px; text-transform: uppercase;">Envie uma mensagem</h2>
+        
+        <form class="contact-form" style="display: flex; flex-direction: column; gap: 15px;">
+            <input type="text" placeholder="Seu Nome Completo" required 
+                   style="padding: 12px; border: 2px solid #ddd; border-radius: 8px; outline: none;">
+            
+            <input type="email" placeholder="Seu melhor e-mail" required 
+                   style="padding: 12px; border: 2px solid #ddd; border-radius: 8px; outline: none;">
+            
+            <textarea rows="6" placeholder="Em que podemos ajudar?" required 
+                      style="padding: 12px; border: 2px solid #ddd; border-radius: 8px; outline: none; resize: vertical;"></textarea>
+            
+            <button type="submit" class="btn-send" 
+                    style="background-color: #000; color: #fff; padding: 15px; border: none; border-radius: 50px; font-weight: bold; cursor: pointer; text-transform: uppercase; letter-spacing: 1px;">
+                ENVIAR AGORA
+            </button>
+        </form>
+    </main>
+
+    <footer style="background-color: #000; color: #fff; text-align: center; padding: 30px; margin-top: 40px;">
+        <p style="font-size: 14px;">Dúvidas? Envie um e-mail para: <strong>suporte@erasedproject.com</strong></p>
+    </footer>
+
+</body>
+</html>
