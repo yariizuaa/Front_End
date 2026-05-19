@@ -2,6 +2,7 @@
 function capturarValores(){
     let num1 = document.getElementById("num1").value;
     let num2 = document.getElementById("num2").value;
+    return {num1, num2};
 }
 
 function mostrarResultado(R){
@@ -10,25 +11,25 @@ function mostrarResultado(R){
 }
 
 function calcularSoma(){
-    capturarValores();
-    let resposta = Number(num1.value) + Number(num2.value);
+    const {num1, num2} = capturarValores();
+    let resposta = Number(num1) + Number(num2);
     mostrarResultado(resposta);
 }
 
 function calcularSubtracao(){
-   capturarValores();
-   let resposta = Number(num1.value) - Number(num2.value);
+   const {num1, num2} = capturarValores();
+   let resposta = Number(num1) - Number(num2);
    mostrarResultado(resposta);
 }
 
 function calcularDivisao(){
-    capturarValores();
-    let resposta = Number(num1.value) / Number(num2.value);
+    const {num1, num2} = capturarValores();
+    let resposta = Number(num1) / Number(num2);
     mostrarResultado(resposta);
 }
 
 function calcularMultiplicacao(){
-    capturarValores();
-    let resposta = Number(num1.value) * Number(num2.value);
+    const {num1, num2} = capturarValores();
+    let resposta = Number(num1) * Number(num2);
     mostrarResultado(resposta);
 }
