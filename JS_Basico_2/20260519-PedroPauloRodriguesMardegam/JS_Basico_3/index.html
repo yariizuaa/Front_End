@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BASICO III</title>
+</head>
+<body>
+    <section>
+        <div>
+            <h1> Básico III - Lista de Exercícios</h1><br>
+            <h2>Exercício 01</h2>
+
+            <p>Criar um botao que mostre uma mensagem saudação em um parágrafo pré-existente, com base no nome digitado na caixa de texto logo acima do botão.</p>
+
+            <input type="text" id="exe01" name="exercicio01"  placeholder="Digite seu nome"><br><br>
+            <button id="butexe01" onclick="alert(saudacao(document.getElementById('exe01').value))">Clique Aqui</button>
+
+            <p id="resultado01"></p>
+        </div>
+    </section>
+   
+
+    <section>
+        <div>
+            <h2>Exercício 02</h2>
+
+            <p>Alterar o estilo de um texto ao clicar em um botão.</p>
+            <p id="texto02" style="color: black; font-size: 16px;">Teste para alterar estilo</p>
+            <button onclick="document.getElementById('texto02').style.color='red'; document.getElementById('texto02').style.fontSize='24px';">Alterar Estilo</button>
+        </div>
+    </section>
+    
+    
+    <section>
+        <div>
+            <h2>Exercício 03</h2>
+
+            <p>Clique no botão para alterar a cor do botão.</p>
+            <button id="btn03" onclick="document.getElementById('btn03').style.backgroundColor=this.style.backgroundColor==='rgb(76, 175, 80)'?'rgb(255, 99, 71)':'rgb(76, 175, 80)'; document.getElementById('btn03').style.color='white';" style="padding: 10px 20px; font-size: 16px; background-color: rgb(76, 175, 80); color: white; border: none; border-radius: 5px; cursor: pointer;">Mudar Cor</button>
+        </div>
+    </section>
+
+        <section>
+        <div>
+            <h2>Exercício 04</h2>
+
+            <p>
+                1 - Crie um novo paragrafo utilizando o método createElement e appendChild.
+                2 - Remove o último parágrafo utilizando o método removeChild e lasElementChild.
+            </p>
+            <div id="container04">
+                <p>Parágrafo 1</p>
+                <p>Parágrafo 2</p>
+            </div>
+            <button onclick="let p = document.createElement('p'); p.textContent = 'Novo parágrafo criado dinamicamente'; document.getElementById('container04').appendChild(p);">Adicionar Parágrafo</button>
+            <button onclick="let div = document.getElementById('container04'); if(div.lastElementChild) div.removeChild(div.lastElementChild);">Remover Último Parágrafo</button>
+        </div>
+    </section>
+
+
+    <section>
+        <div>
+            <h2>Exercício 05</h2>
+
+            <p>Mostrar e esconder uma imagem, ao clicar em um determinado botão.</p>
+            <img id="img05" src="./imgs/imagem.webp" style="display:block;"><br>
+            <button onclick="let img = document.getElementById('img05'); img.style.display = img.style.display === 'none' ? 'block' : 'none';">Mostrar/Esconder Imagem</button>
+        </div>
+    </section>
+
+
+    <section>
+        <div>
+            <h2>Exercício 06</h2>
+
+            <p>Trocar a imagem para uma imagem de um assunto selecionado pelo usuário.</p>
+                <button onclick="let img = document.getElementById('')"
+                <option value="gato">Gato</option>
+                <option value="cachorro">Cachorro</option>
+                <option value="passaro">Pássaro</option>
+            </select><br><br>
+            <img id="img06">
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    <section>
+        <div>
+            <h2>Exercício 07</h2>
+
+            <p>Alterar a cor de uma div quando o mouse passar sobre ela.</p>
+            <div id="div07" style="width: 200px; height: 100px; background-color: lightblue; padding: 10px; cursor: pointer;" onmouseover="document.getElementById('div07').style.backgroundColor='lightcoral';" onmouseout="document.getElementById('div07').style.backgroundColor='lightblue';">
+                Passe o mouse aqui para mudar a cor
+            </div>
+        </div>
+    </section>
+
+
+    <section>
+        <div>
+            <h2>Exercício 08</h2>
+
+            <p>Exibir uma mensagem quando o usuário passar o mouse sobre uma imagem.</p>
+            <img src="https://via.placeholder.com/150" onmouseover="alert('Você passou o mouse sobre a imagem!')" onmouseout="" style="cursor: pointer;">
+        </div>
+    </section>
+
+
+    <section>
+        <div>
+            <h2>Exercício 09</h2>
+
+            <p>Criar vários itens automáticamente - Lista Dinâmica.</p>
+            <button onclick="let ul = document.getElementById('lista09'); for(let i=1; i<=5; i++){ let li = document.createElement('li'); li.textContent = 'Item ' + (ul.children.length + 1); ul.appendChild(li); }">Adicionar 5 Itens</button>
+            <button onclick="document.getElementById('lista09').innerHTML = '';">Limpar Lista</button>
+            <ul id="lista09"></ul>
+        </div>
+    </section>
+
+
+    <script src="./JS/script.js"></script>
+</body>
+</html>
