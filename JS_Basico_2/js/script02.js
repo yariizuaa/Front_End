@@ -18,10 +18,17 @@ function calcularMedia(){
     console.log(media);
 
     let p = document.getElementById("media");
-    p.innerText("A media é:" + media);
+    p.innerText = "A media é: " + media;
 }
 
 //exe03
-function verifica(){
-    alert('ola');
+function verificarMaior(){
+    let num1 = document.getElementById("num1Exe03").value;
+    let num2 = document.getElementById("num2Exe03").value;
+
+    if(Number(num1) > Number(num2)){
+        document.getElementById("RespostaExe03").innerText = "O maior número é: " + num1;
+    } else {
+        document.getElementById("RespostaExe03").innerText = "O maior número é: " + num2;
+    }
 }
