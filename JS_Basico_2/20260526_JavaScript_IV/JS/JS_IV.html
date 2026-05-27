@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lista de Exercícios — Prof. Luiz Fernando Corcini</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #0f0f13;
+      --surface: #18181f;
+      --card: #1e1e28;
+      --border: #2a2a38;
+      --accent: #e8a045;
+      --accent2: #5c9eff;
+      --accent3: #7effa0;
+      --text: #e8e8f0;
+      --muted: #7a7a95;
+      --radius: 10px;
+      --mono: 'Space Mono', monospace;
+      --sans: 'Syne', sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      min-height: 100vh;
+      padding: 2rem 1rem 4rem;
+    }
+
+    h1 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800;
+      text-align: center;
+      letter-spacing: -1px;
+      margin-bottom: .3rem;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: .8rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.4rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.4rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform .2s, border-color .2s;
+    }
+    .card:hover { transform: translateY(-3px); border-color: var(--accent); }
+
+    .card-num {
+      font-family: var(--mono);
+      font-size: .72rem;
+      color: var(--accent);
+      background: rgba(232,160,69,.12);
+      display: inline-block;
+      padding: .2rem .55rem;
+      border-radius: 4px;
+      margin-bottom: .7rem;
+    }
+
+    .card h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: .9rem;
+      color: var(--text);
+      line-height: 1.4;
+    }
+
+    /* ── shared form components ── */
+    input[type="text"], input[type="number"], select, textarea {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: var(--mono);
+      font-size: .82rem;
+      padding: .45rem .7rem;
+      border-radius: 6px;
+      width: 100%;
+      margin-bottom: .6rem;
+      outline: none;
+      transition: border-color .2s;
+    }
+    input:focus, select:focus, textarea:focus { border-color: var(--accent2); }
+
+    .btn {
+      display: inline-block;
+      background: var(--accent);
+      color: #111;
+      border: none;
+      border-radius: 6px;
+      padding: .45rem 1rem;
+      font-family: var(--sans);
+      font-weight: 600;
+      font-size: .82rem;
+      cursor: pointer;
+      transition: opacity .15s, transform .15s;
+      margin: .2rem .2rem .2rem 0;
+    }
+    .btn:hover { opacity: .85; transform: scale(1.03); }
+    .btn.blue  { background: var(--accent2); color: #fff; }
+    .btn.green { background: var(--accent3); color: #111; }
+    .btn.red   { background: #e05555; color: #fff; }
+    .btn.ghost { background: transparent; border: 1px solid var(--border); color: var(--muted); }
+
+    .output {
+      font-family: var(--mono);
+      font-size: .8rem;
+      color: var(--accent3);
+      margin-top: .6rem;
+      min-height: 1.2rem;
+    }
+
+    /* ── Ex 3 color buttons ── */
+    .colorbtn {
+      width: 38px; height: 38px;
+      border: 2px solid transparent;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: transform .15s, border-color .15s;
+      display: inline-block;
+      margin-right: .35rem;
+    }
+    .colorbtn:hover { transform: scale(1.15); border-color: #fff5; }
+
+    /* ── Ex 4 paragraphs ── */
+    #ex4-paras p {
+      background: var(--surface);
+      border-left: 3px solid var(--accent2);
+      padding: .4rem .7rem;
+      border-radius: 4px;
+      font-size: .82rem;
+      margin: .35rem 0;
+      animation: fadeIn .3s ease;
+    }
+    @keyframes fadeIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:none; } }
+
+    /* ── Ex 5 image toggle ── */
+    #ex5-img { width: 100%; border-radius: 8px; margin-top: .5rem; display: block; transition: opacity .3s; }
+
+    /* ── Ex 6 image swap ── */
+    #ex6-img { width: 100%; border-radius: 8px; margin-top: .6rem; transition: opacity .35s; }
+
+    /* ── Ex 7 animated div ── */
+    #ex7-div {
+      width: 100px; height: 100px;
+      background: var(--accent2);
+      border-radius: 8px;
+      margin-top: .7rem;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .75rem; color: #fff;
+      transition: all .3s ease;
+      cursor: default;
+    }
+
+    /* ── Ex 8 tooltip image ── */
+    .img-wrap { position: relative; display: inline-block; width: 100%; margin-top: .6rem; }
+    .img-wrap img { width: 100%; border-radius: 8px; display: block; }
+    .img-tooltip {
+      position: absolute; bottom: 8px; left: 8px; right: 8px;
+      background: rgba(0,0,0,.78);
+      color: #fff; font-size: .78rem;
+      padding: .4rem .6rem; border-radius: 6px;
+      opacity: 0; pointer-events: none;
+      transition: opacity .25s;
+    }
+    .img-wrap:hover .img-tooltip { opacity: 1; }
+
+    /* ── Ex 9 list ── */
+    #ex9-list { list-style: none; padding: 0; margin-top: .5rem; }
+    #ex9-list li {
+      background: var(--surface);
+      border-left: 3px solid var(--accent3);
+      padding: .35rem .7rem;
+      border-radius: 4px;
+      font-size: .82rem;
+      margin: .3rem 0;
+      animation: fadeIn .3s ease;
+    }
+
+    /* ── Ex 10 shopping list ── */
+    #ex10-list { list-style: none; padding: 0; margin-top: .5rem; }
+    #ex10-list li {
+      display: flex; justify-content: space-between; align-items: center;
+      background: var(--surface);
+      padding: .35rem .7rem;
+      border-radius: 6px;
+      margin: .3rem 0;
+      font-size: .82rem;
+      animation: fadeIn .3s ease;
+    }
+    #ex10-list li.done { text-decoration: line-through; opacity: .5; }
+    #ex10-list li button { background: none; border: none; color: #e05555; cursor: pointer; font-size: .9rem; }
+
+    /* ── Ex 11 challenge ── */
+    #ex11-canvas {
+      background: var(--surface);
+      border-radius: 8px;
+      margin-top: .6rem;
+      touch-action: none;
+      cursor: crosshair;
+      display: block;
+    }
+    .ex11-tools { display: flex; flex-wrap: wrap; gap: .35rem; margin: .5rem 0 .3rem; }
+    .swatch {
+      width: 26px; height: 26px; border-radius: 50%; border: 2px solid transparent;
+      cursor: pointer; transition: transform .15s, border-color .15s;
+    }
+    .swatch.active { border-color: #fff; transform: scale(1.2); }
+    .swatch:hover { transform: scale(1.15); }
+  </style>
+</head>
+<body>
+
+<h1>Lista de Exercícios</h1>
+<p class="subtitle">Prof. Luiz Fernando Corcini · JavaScript + HTML + CSS</p>
+
+<div class="grid">
+
+  <!-- ══ EX 1 ══ -->
+  <div class="card">
+    <span class="card-num">EXERCÍCIO 01</span>
+    <h2>Saudação com nome digitado</h2>
+    <input type="text" id="ex1-name" placeholder="Digite seu nome…" />
+    <button class="btn" onclick="ex1()">Receber Saudação</button>
+    <div class="output" id="ex1-out"></div>
+  </div>
+
+  <!-- ══ EX 2 ══ -->
+  <div class="card">
+    <span class="card-num">EXERCÍCIO 02</span>
+    <h2>Alterar tamanho e cor do texto</h2>
+    <p id="ex2-para" style="font-size:14px;color:var(--text);transition:all .3s;">
+      Este é um parágrafo de exemplo. Clique no botão para transformá-lo!
+    </p>
+    <button class="btn" style="margin-top:.6rem" onclick="ex2()">Alterar Texto</button>
+    <button class="btn ghost" onclick="ex2reset()">Resetar</button>
+  </div>
+
+  <!-- ══ EX 3 ══ -->
+  <div class="card">
+    <span class="card-num">EXERCÍCIO 03</span>
+    <h2>Alterar cor de fundo da tela</h2>
+    <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.3rem">
+      <div class="colorbtn" style="background:#0f0f13" title="Original"   onclick="ex3('#0f0f13')"></div>
+      <div class="colorbtn" style="background:#1a3a5c" title="Azul"       onclick="ex3('#1a3a5c')"></div>
+      <div class="colorbtn" style="background:#2d1a3a" title="Roxo"       onclick="ex3('#2d1a3a')"></div>
+      <div class="colorbtn" style="background:#1a3a2a" title="Verde"      onclick="ex3('#1a3a2a')"></div>
+    </div>
+    <div class="output" id="ex3-out" style="margin-top:.5rem"></div>
+  </div>
+
+  <!-- ══ EX 4 ══ -->
+  <div class="card">
+    <span class="card-num">EXERCÍCIO 04</span>
+    <h2>Criar e remover parágrafos</h2>
+    <input type="text" id="ex4-input" placeholder="Texto do parágrafo…" />
+    <button class="btn green" onclick="ex4add()">+ Adicionar</button>
+    <button class="btn red"   onclick="ex4remove()">− Remover Último</button>
+    <div id="ex4-paras"></div>
+    <div class="output" id="ex4-msg"></div>
+  </div>
+
+  <!-- ══ EX 5 ══ -->
+  <div class="card">
+    <span class="card-num">EXERCÍCIO 05</span>
+    <h2>Mostrar / Ocultar imagem</h2>
+    <button class="btn blue" onclick="ex5()">Mostrar / Ocultar</button>
+    <img id="ex5-img"
+         src="https://picsum.photos/seed/ex5/400/200"
+         alt="Imagem exercício 5"
+         style="display:none" />
+  </div>
+
+  <!-- ══ EX 6 ══ -->
+  <div class="card">
+    <span class="card-num">EXERCÍCIO 06</span>
+    <h2>Trocar imagem com SELECT</h2>
+    <select id="ex6-sel" onchange="ex6()">
+      <option value="https://picsum.photos/seed/nature/400/200">🌿 Natureza</option>
+      <option value="https://picsum.photos/seed/city/400/200">🏙️ Cidade</option>
+      <option value="https://picsum.photos/seed/ocean/400/200">🌊 Oceano</option>
+      <option value="https://picsum.photos/seed/mountain/400/200">⛰️ Montanha</option>
+    </select>
+    <img id="ex6-img"
+         src="https://picsum.photos/seed/nature/400/200"
+         alt="Imagem exercício 6" />
+  </div>
+
+  <!-- ══ EX 7 ══ -->
+  <div class="card">
+    <span class="card-num">EXERCÍCIO 07</span>
+    <h2>Div que muda ao passar o mouse</h2>
+    <p style="font-size:.8rem;color:var(--muted)">Passe o mouse sobre o quadrado abaixo.</p>
+    <div id="ex7-div"
+         onmouseenter="ex7enter()"
+         onmouseleave="ex7leave()">Passe aqui</div>
+  </div>
+
+  <!-- ══ EX 8 ══ -->
+  <div class="card">
+    <span class="card-num">EXERCÍCIO 08</span>
+    <h2>Tooltip ao passar o mouse na imagem</h2>
+    <div class="img-wrap">
+      <img src="https://picsum.photos/seed/tooltip/400/200" alt="Hover me" />
+      <div class="img-tooltip">📸 Esta imagem foi tirada em algum lugar incrível do mundo!</div>
+    </div>
+  </div>
+
+  <!-- ══ EX 9 ══ -->
+  <div class="card">
+    <span class="card-num">EXERCÍCIO 09</span>
+    <h2>Inserir itens numa lista não ordenada</h2>
+    <button class="btn" onclick="ex9()">+ Inserir Itens</button>
+    <ul id="ex9-list"></ul>
+  </div>
+
+  <!-- ══ EX 10 ══ -->
+  <div class="card">
+    <span class="card-num">EXERCÍCIO 10</span>
+    <h2>Lista de Compras</h2>
+    <div style="display:flex;gap:.5rem">
+      <input type="text" id="ex10-input" placeholder="Item da lista…" style="margin:0;flex:1" />
+      <button class="btn green" onclick="ex10add()" style="margin:0;white-space:nowrap">Adicionar</button>
+    </div>
+    <ul id="ex10-list"></ul>
+    <div class="output" id="ex10-total"></div>
+  </div>
+
+  <!-- ══ EX 11 ══ -->
+  <div class="card" style="grid-column: 1 / -1">
+    <span class="card-num">EXERCÍCIO 11 — DESAFIO 🎨</span>
+    <h2>Mini Paint — Desenhe livremente na tela</h2>
+    <div class="ex11-tools">
+      <span style="font-size:.8rem;color:var(--muted);align-self:center;margin-right:.3rem">Cor:</span>
+      <div class="swatch active" style="background:#5c9eff" data-color="#5c9eff" onclick="ex11color(this)"></div>
+      <div class="swatch"        style="background:#7effa0" data-color="#7effa0" onclick="ex11color(this)"></div>
+      <div class="swatch"        style="background:#e8a045" data-color="#e8a045" onclick="ex11color(this)"></div>
+      <div class="swatch"        style="background:#e05555" data-color="#e05555" onclick="ex11color(this)"></div>
+      <div class="swatch"        style="background:#ffffff" data-color="#ffffff" onclick="ex11color(this)"></div>
+      <div class="swatch"        style="background:#ff9de2" data-color="#ff9de2" onclick="ex11color(this)"></div>
+      <span style="font-size:.8rem;color:var(--muted);align-self:center;margin:0 .3rem 0 .6rem">Tamanho:</span>
+      <input type="range" id="ex11-size" min="1" max="30" value="6" style="width:80px;background:none;border:none;padding:0;margin:0"/>
+      <button class="btn ghost" style="margin:0;padding:.3rem .7rem" onclick="ex11clear()">🗑 Limpar</button>
+    </div>
+    <canvas id="ex11-canvas" width="900" height="300" style="width:100%;height:200px"></canvas>
+  </div>
+
+</div><!-- /grid -->
+
+<script>
+/* ── EX 1 ── */
+function ex1() {
+  const n = document.getElementById('ex1-name').value.trim();
+  const out = document.getElementById('ex1-out');
+  out.textContent = n ? `👋 Olá, ${n}! Seja muito bem-vindo(a)!` : '⚠️ Por favor, digite seu nome.';
+}
+
+/* ── EX 2 ── */
+const ex2Styles = [
+  {size:'22px', color:'#5c9eff'},
+  {size:'18px', color:'#7effa0'},
+  {size:'26px', color:'#e8a045'},
+  {size:'14px', color:'#e05555'},
+];
+let ex2idx = 0;
+function ex2() {
+  const p = document.getElementById('ex2-para');
+  const s = ex2Styles[ex2idx % ex2Styles.length];
+  p.style.fontSize = s.size;
+  p.style.color = s.color;
+  ex2idx++;
+}
+function ex2reset() {
+  const p = document.getElementById('ex2-para');
+  p.style.fontSize = '14px';
+  p.style.color = 'var(--text)';
+  ex2idx = 0;
+}
+
+/* ── EX 3 ── */
+const ex3names = {'#0f0f13':'Original 🖤','#1a3a5c':'Azul Noturno 🔵','#2d1a3a':'Roxo Profundo 💜','#1a3a2a':'Verde Floresta 🌿'};
+function ex3(cor) {
+  document.body.style.background = cor;
+  document.getElementById('ex3-out').textContent = `Cor aplicada: ${ex3names[cor]}`;
+}
+
+/* ── EX 4 ── */
+const ex4paras = [];
+function ex4add() {
+  const val = document.getElementById('ex4-input').value.trim();
+  if (!val) return;
+  const p = document.createElement('p');
+  p.textContent = val;
+  document.getElementById('ex4-paras').appendChild(p);
+  ex4paras.push(p);
+  document.getElementById('ex4-input').value = '';
+  document.getElementById('ex4-msg').textContent = '';
+}
+function ex4remove() {
+  if (!ex4paras.length) {
+    document.getElementById('ex4-msg').textContent = '⚠️ Não há mais parágrafos para remover.';
+    return;
+  }
+  const last = ex4paras.pop();
+  last.remove();
+  document.getElementById('ex4-msg').textContent = ex4paras.length
+    ? `✅ Parágrafo removido. Restam ${ex4paras.length}.`
+    : '⚠️ Todos os parágrafos foram removidos!';
+}
+
+/* ── EX 5 ── */
+let ex5visible = false;
+function ex5() {
+  const img = document.getElementById('ex5-img');
+  ex5visible = !ex5visible;
+  img.style.display = ex5visible ? 'block' : 'none';
+}
+
+/* ── EX 6 ── */
+function ex6() {
+  const sel = document.getElementById('ex6-sel');
+  const img = document.getElementById('ex6-img');
+  img.style.opacity = '0';
+  setTimeout(() => {
+    img.src = sel.value;
+    img.style.opacity = '1';
+  }, 280);
+}
+
+/* ── EX 7 ── */
+const ex7orig = {
+  width:'100px', height:'100px', background:'#5c9eff',
+  borderRadius:'8px', transform:'rotate(0deg)', fontSize:'.75rem'
+};
+function ex7enter() {
+  const d = document.getElementById('ex7-div');
+  d.style.width = '140px';
+  d.style.height = '140px';
+  d.style.background = '#e8a045';
+  d.style.borderRadius = '50%';
+  d.style.transform = 'rotate(15deg)';
+  d.style.fontSize = '1rem';
+  d.textContent = '🔥 Hover!';
+}
+function ex7leave() {
+  const d = document.getElementById('ex7-div');
+  Object.assign(d.style, ex7orig);
+  d.textContent = 'Passe aqui';
+}
+
+/* ── EX 9 ── */
+function ex9() {
+  const qtd = parseInt(prompt('Quantos itens deseja adicionar?'));
+  if (isNaN(qtd) || qtd <= 0) return;
+  const ul = document.getElementById('ex9-list');
+  for (let i = 0; i < qtd; i++) {
+    const texto = prompt(`Digite o texto do item ${i + 1}:`);
+    if (texto === null) break;
+    const li = document.createElement('li');
+    li.textContent = texto || '(sem texto)';
+    ul.appendChild(li);
+  }
+}
+
+/* ── EX 10 ── */
+let ex10items = [];
+function ex10add() {
+  const inp = document.getElementById('ex10-input');
+  const val = inp.value.trim();
+  if (!val) return;
+  ex10items.push({ texto: val, done: false });
+  inp.value = '';
+  ex10render();
+}
+function ex10toggle(i) {
+  ex10items[i].done = !ex10items[i].done;
+  ex10render();
+}
+function ex10del(i) {
+  ex10items.splice(i, 1);
+  ex10render();
+}
+function ex10render() {
+  const ul = document.getElementById('ex10-list');
+  ul.innerHTML = '';
+  ex10items.forEach((it, i) => {
+    const li = document.createElement('li');
+    li.className = it.done ? 'done' : '';
+    li.innerHTML = `<span onclick="ex10toggle(${i})" style="cursor:pointer;flex:1">${it.done ? '✅' : '⬜'} ${it.texto}</span>
+                    <button onclick="ex10del(${i})">✕</button>`;
+    ul.appendChild(li);
+  });
+  const done = ex10items.filter(x => x.done).length;
+  document.getElementById('ex10-total').textContent =
+    ex10items.length ? `${done}/${ex10items.length} itens marcados` : '';
+}
